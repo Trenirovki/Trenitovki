@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-     <div class="background-overlay" aria-hidden="true"></div>
+  <div class="background-overlay" aria-hidden="true"></div>
 
   <div class="container">
     <header class="site-header">
@@ -19,12 +19,11 @@
     </header>
 
     <nav class="tabs" role="tablist" aria-label="Разделы приложения">
-      <button type="button" class="tab-btn active" role="tab" aria-selected="true" aria-controls="workouts" data-tab="workouts">Тренировки</button>
-      <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="nutrition" data-tab="nutrition">Питание</button>
-      <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="stats" data-tab="stats">Статистика</button>
+      <button type="button" class="tab-btn active" role="tab" aria-selected="true" data-tab="workouts">Тренировки</button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab="nutrition">Питание</button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab="stats">Статистика</button>
     </nav>
 
-    <!-- Тренировки -->
     <section id="workouts" class="tab-content active" role="tabpanel">
       <div class="card">
         <h2>Добавить тренировку</h2>
@@ -89,7 +88,6 @@
       </div>
     </section>
 
-    <!-- Питание -->
     <section id="nutrition" class="tab-content" role="tabpanel" hidden>
       <div class="card">
         <h2>Добавить приём пищи</h2>
@@ -156,7 +154,6 @@
       </div>
     </section>
 
-    <!-- Статистика -->
     <section id="stats" class="tab-content" role="tabpanel" hidden>
       <div class="card">
         <h2>Общая статистика</h2>
