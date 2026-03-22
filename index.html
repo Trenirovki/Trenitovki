@@ -1,227 +1,227 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Дневник тренировок и питания</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Дневник тренировок и питания</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="background-overlay"></div>
-    
-    <div class="container">
-        <header>
-            <h1>Дневник тренировок и питания</h1>
-            <p>Отслеживайте свой прогресс каждый день</p>
-        </header>
-        
-        <div class="tabs">
-            <button class="tab-btn active" data-tab="workouts">Тренировки</button>
-            <button class="tab-btn" data-tab="nutrition">Питание</button>
-            <button class="tab-btn" data-tab="stats">Статистика</button>
+     <div class="background-overlay" aria-hidden="true"></div>
+
+  <div class="container">
+    <header class="site-header">
+      <h1>Дневник тренировок и питания</h1>
+      <p class="site-subtitle">Отслеживайте прогресс каждый день</p>
+    </header>
+
+    <nav class="tabs" role="tablist" aria-label="Разделы приложения">
+      <button type="button" class="tab-btn active" role="tab" aria-selected="true" aria-controls="workouts" data-tab="workouts">Тренировки</button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="nutrition" data-tab="nutrition">Питание</button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="stats" data-tab="stats">Статистика</button>
+    </nav>
+
+    <!-- Тренировки -->
+    <section id="workouts" class="tab-content active" role="tabpanel">
+      <div class="card">
+        <h2>Добавить тренировку</h2>
+        <form id="workout-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="workout-date">Дата</label>
+              <input type="date" id="workout-date" name="workout-date" required>
+            </div>
+            <div class="form-group">
+              <label for="workout-type">Тип тренировки</label>
+              <select id="workout-type" name="workout-type" required>
+                <option value="">Выберите тип</option>
+                <option value="Силовая">Силовая</option>
+                <option value="Кардио">Кардио</option>
+                <option value="HIIT">HIIT</option>
+                <option value="Йога">Йога</option>
+                <option value="Растяжка">Растяжка</option>
+                <option value="Плавание">Плавание</option>
+                <option value="Бег">Бег</option>
+                <option value="Велосипед">Велосипед</option>
+                <option value="Другое">Другое</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="workout-duration">Длительность (минут)</label>
+              <input type="number" id="workout-duration" name="workout-duration" min="1" required>
+            </div>
+            <div class="form-group">
+              <label for="workout-calories">Калории сожжено</label>
+              <input type="number" id="workout-calories" name="workout-calories" min="0">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="workout-notes">Упражнения / заметки</label>
+            <textarea id="workout-notes" name="workout-notes" rows="4" placeholder="Подходы, повторения, ощущения…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Добавить тренировку</button>
+        </form>
+      </div>
+
+      <div class="entry-list">
+        <h2>История тренировок</h2>
+        <div class="filter-bar">
+          <input type="date" id="workout-filter-date" aria-label="Фильтр по дате">
+          <select id="workout-filter-type" aria-label="Фильтр по типу">
+            <option value="">Все типы</option>
+            <option value="Силовая">Силовая</option>
+            <option value="Кардио">Кардио</option>
+            <option value="HIIT">HIIT</option>
+            <option value="Йога">Йога</option>
+            <option value="Растяжка">Растяжка</option>
+            <option value="Плавание">Плавание</option>
+            <option value="Бег">Бег</option>
+            <option value="Велосипед">Велосипед</option>
+            <option value="Другое">Другое</option>
+          </select>
         </div>
-        
-        <!-- Тренировки -->
-        <div id="workouts" class="tab-content active">
-            <div class="card">
-                <h2>Добавить тренировку</h2>
-                <form id="workout-form">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Дата</label>
-                            <input type="date" id="workout-date" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Тип тренировки</label>
-                            <select id="workout-type" required>
-                                <option value="">Выберите тип</option>
-                                <option value="Силовая">Силовая</option>
-                                <option value="Кардио">Кардио</option>
-                                <option value="HIIT">HIIT</option>
-                                <option value="Йога">Йога</option>
-                                <option value="Растяжка">Растяжка</option>
-                                <option value="Плавание">Плавание</option>
-                                <option value="Бег">Бег</option>
-                                <option value="Велосипед">Велосипед</option>
-                                <option value="Другое">Другое</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Длительность (минут)</label>
-                            <input type="number" id="workout-duration" min="1" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Калории сожжено</label>
-                            <input type="number" id="workout-calories" min="0">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Упражнения / Заметки</label>
-                        <textarea id="workout-notes" placeholder="Опишите упражнения, подходы, повторения..."></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Добавить тренировку</button>
-                </form>
+        <div id="workout-list"></div>
+      </div>
+    </section>
+
+    <!-- Питание -->
+    <section id="nutrition" class="tab-content" role="tabpanel" hidden>
+      <div class="card">
+        <h2>Добавить приём пищи</h2>
+        <form id="meal-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="meal-date">Дата</label>
+              <input type="date" id="meal-date" name="meal-date" required>
             </div>
-            
-            <div class="entry-list">
-                <h2>История тренировок</h2>
-                <div class="filter-bar">
-                    <input type="date" id="workout-filter-date" placeholder="Фильтр по дате">
-                    <select id="workout-filter-type">
-                        <option value="">Все типы</option>
-                        <option value="Силовая">Силовая</option>
-                        <option value="Кардио">Кардио</option>
-                        <option value="HIIT">HIIT</option>
-                        <option value="Йога">Йога</option>
-                        <option value="Растяжка">Растяжка</option>
-                        <option value="Плавание">Плавание</option>
-                        <option value="Бег">Бег</option>
-                        <option value="Велосипед">Велосипед</option>
-                        <option value="Другое">Другое</option>
-                    </select>
-                </div>
-                <div id="workout-list"></div>
+            <div class="form-group">
+              <label for="meal-type">Приём пищи</label>
+              <select id="meal-type" name="meal-type" required>
+                <option value="">Выберите</option>
+                <option value="Завтрак">Завтрак</option>
+                <option value="Обед">Обед</option>
+                <option value="Ужин">Ужин</option>
+                <option value="Перекус">Перекус</option>
+              </select>
             </div>
+          </div>
+          <div class="form-group">
+            <label for="meal-name">Блюдо / продукты</label>
+            <input type="text" id="meal-name" name="meal-name" placeholder="Например: овсянка с бананом" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="meal-calories">Калории</label>
+              <input type="number" id="meal-calories" name="meal-calories" min="0" required>
+            </div>
+            <div class="form-group">
+              <label for="meal-protein">Белки (г)</label>
+              <input type="number" id="meal-protein" name="meal-protein" min="0">
+            </div>
+            <div class="form-group">
+              <label for="meal-fat">Жиры (г)</label>
+              <input type="number" id="meal-fat" name="meal-fat" min="0">
+            </div>
+            <div class="form-group">
+              <label for="meal-carbs">Углеводы (г)</label>
+              <input type="number" id="meal-carbs" name="meal-carbs" min="0">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="meal-notes">Заметки</label>
+            <textarea id="meal-notes" name="meal-notes" rows="3" placeholder="Дополнительно…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Добавить приём пищи</button>
+        </form>
+      </div>
+
+      <div class="entry-list">
+        <h2>История питания</h2>
+        <div class="filter-bar">
+          <input type="date" id="meal-filter-date" aria-label="Фильтр по дате">
+          <select id="meal-filter-type" aria-label="Фильтр по приёму пищи">
+            <option value="">Все приёмы</option>
+            <option value="Завтрак">Завтрак</option>
+            <option value="Обед">Обед</option>
+            <option value="Ужин">Ужин</option>
+            <option value="Перекус">Перекус</option>
+          </select>
         </div>
-        
-        <!-- Питание -->
-        <div id="nutrition" class="tab-content">
-            <div class="card">
-                <h2>Добавить приём пищи</h2>
-                <form id="meal-form">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Дата</label>
-                            <input type="date" id="meal-date" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Приём пищи</label>
-                            <select id="meal-type" required>
-                                <option value="">Выберите</option>
-                                <option value="Завтрак">Завтрак</option>
-                                <option value="Обед">Обед</option>
-                                <option value="Ужин">Ужин</option>
-                                <option value="Перекус">Перекус</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Блюдо / Продукты</label>
-                        <input type="text" id="meal-name" placeholder="Например: Овсянка с бананом" required>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Калории</label>
-                            <input type="number" id="meal-calories" min="0" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Белки (г)</label>
-                            <input type="number" id="meal-protein" min="0">
-                        </div>
-                        <div class="form-group">
-                            <label>Жиры (г)</label>
-                            <input type="number" id="meal-fat" min="0">
-                        </div>
-                        <div class="form-group">
-                            <label>Углеводы (г)</label>
-                            <input type="number" id="meal-carbs" min="0">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Заметки</label>
-                        <textarea id="meal-notes" placeholder="Дополнительная информация..."></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Добавить приём пищи</button>
-                </form>
-            </div>
-            
-            <div class="entry-list">
-                <h2>История питания</h2>
-                <div class="filter-bar">
-                    <input type="date" id="meal-filter-date" placeholder="Фильтр по дате">
-                    <select id="meal-filter-type">
-                        <option value="">Все приёмы</option>
-                        <option value="Завтрак">Завтрак</option>
-                        <option value="Обед">Обед</option>
-                        <option value="Ужин">Ужин</option>
-                        <option value="Перекус">Перекус</option>
-                    </select>
-                </div>
-                <div id="meal-list"></div>
-            </div>
+        <div id="meal-list"></div>
+      </div>
+    </section>
+
+    <!-- Статистика -->
+    <section id="stats" class="tab-content" role="tabpanel" hidden>
+      <div class="card">
+        <h2>Общая статистика</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" id="total-workouts">0</div>
+            <div class="stat-label">Тренировок</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="total-workout-time">0</div>
+            <div class="stat-label">Минут занятий</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="total-burned">0</div>
+            <div class="stat-label">Калорий сожжено</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="total-meals">0</div>
+            <div class="stat-label">Приёмов пищи</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="avg-calories">0</div>
+            <div class="stat-label">Ср. калорий / день</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="avg-protein">0</div>
+            <div class="stat-label">Ср. белка / день (г)</div>
+          </div>
         </div>
-        
-        <!-- Статистика -->
-        <div id="stats" class="tab-content">
-            <div class="card">
-                <h2>Общая статистика</h2>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-value" id="total-workouts">0</div>
-                        <div class="stat-label">Тренировок</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="total-workout-time">0</div>
-                        <div class="stat-label">Минут занятий</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="total-burned">0</div>
-                        <div class="stat-label">Калорий сжжено</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="total-meals">0</div>
-                        <div class="stat-label">Приёмов пищи</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="avg-calories">0</div>
-                        <div class="stat-label">Ср. калорий/день</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="avg-protein">0</div>
-                        <div class="stat-label">Ср. белка/день (г)</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card">
-                <h2>Статистика за сегодня</h2>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-value" id="today-calories">0</div>
-                        <div class="stat-label">Калорий съедено</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="today-protein">0</div>
-                        <div class="stat-label">Белка (г)</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="today-workout">0</div>
-                        <div class="stat-label">Мин. тренировки</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="today-burned">0</div>
-                        <div class="stat-label">Калорий сжжено</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card">
-                <h2>Управление данными</h2>
-                <div class="data-buttons">
-                    <button class="btn btn-primary" id="export-btn">Экспорт данных</button>
-                    <label class="btn btn-primary">
-                        Импорт данных
-                        <input type="file" id="import-file" accept=".json">
-                    </label>
-                    <button class="btn btn-danger" id="clear-btn">Очистить все данные</button>
-                </div>
-            </div>
+      </div>
+
+      <div class="card">
+        <h2>Статистика за сегодня</h2>
+        <div class="stats-grid stats-grid--compact">
+          <div class="stat-card">
+            <div class="stat-value" id="today-calories">0</div>
+            <div class="stat-label">Калорий съедено</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="today-protein">0</div>
+            <div class="stat-label">Белка (г)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="today-workout">0</div>
+            <div class="stat-label">Мин. тренировки</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="today-burned">0</div>
+            <div class="stat-label">Калорий сожжено</div>
+          </div>
         </div>
-    </div>
-    
-    <script src="script.js"></script>
+      </div>
+
+      <div class="card">
+        <h2>Управление данными</h2>
+        <div class="data-buttons">
+          <button type="button" class="btn btn-primary" id="export-btn">Экспорт данных</button>
+          <input type="file" id="import-file" class="file-input-hidden" accept=".json,application/json">
+          <label for="import-file" class="btn btn-primary">Импорт данных</label>
+          <button type="button" class="btn btn-danger" id="clear-btn">Очистить все данные</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
